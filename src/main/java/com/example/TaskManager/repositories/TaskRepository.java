@@ -1,5 +1,7 @@
 package com.example.TaskManager.repositories;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.TaskManager.entities.Task;
@@ -9,5 +11,5 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
 
     public Task findByName(String name);
     
-    public Iterable<Task> findAllByUser(User user);
+    public List<Task> findAllByUser(User user);
 }

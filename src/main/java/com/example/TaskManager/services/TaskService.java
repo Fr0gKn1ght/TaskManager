@@ -1,5 +1,7 @@
 package com.example.TaskManager.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,13 @@ public class TaskService {
 	
 		return taskRepository.findAll();
 	}
+	
+	public Task getTask(String name)
+	{
+		return taskRepository.findByName(name);
+	}
 
-	public Iterable<Task> GetTasksByUser(User user) {
-		//TODO: what do we do if the user doesn't have any tasks or doesn't exist?
-		
+	public List<Task> GetTasksByUser(User user) {
 		return(taskRepository.findAllByUser(user));
 	}
 }

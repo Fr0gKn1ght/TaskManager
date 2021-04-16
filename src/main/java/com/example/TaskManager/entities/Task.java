@@ -1,9 +1,12 @@
 package com.example.TaskManager.entities;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
@@ -11,21 +14,21 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-
 public class Task {
-
-	
 	@Id
-	   @GeneratedValue(strategy=GenerationType.IDENTITY)
-	   private Integer id;
-	   private String name;
-	   private Date startDate;
-	   private Date endDate;
-	   private String severity;
-	   private String description;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+		
+	@Column
+	private String name;
+	private Date startDate;
+	private Date endDate;
+	private String severity;
+	private String description;
 	   
-	   @ManyToOne
-	   private User user;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id")
+	private User user = new User();
 	   
 	   
 	public Task(String name, Date startDate, Date endDate, String severity, String description,
@@ -94,7 +97,4 @@ public class Task {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	
-
 }
